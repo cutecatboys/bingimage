@@ -10,7 +10,7 @@ class BingError(Exception):
     def __str__(self):
         return repr(self.value)
 
-class BingImage:
+class BingImage(object):
     def __init__(self, url = None):
         if url == None:
             self.bing_url = 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US'
