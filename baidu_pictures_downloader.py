@@ -4,6 +4,7 @@
 import urllib2
 import os
 from bs4 import BeautifulSoup
+import progressbar
 
 class down_pic:
 
@@ -25,7 +26,9 @@ class down_pic:
                 self.img_url.append(img['src'])
 
     def downthem(self):
-        for url in self.img_url:
+        print 'A total of', len(self.img_url), 'pictures:'
+        pbar = progressbar.ProgressBar()
+        for url in pbar(self.img_url):
             with open(str(self._num) + '.jpg', 'w') as f:
                 f.write(urllib2.urlopen(url).read())
             self._num = self._num + 1
