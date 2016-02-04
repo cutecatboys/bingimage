@@ -5,6 +5,7 @@ import urllib2
 import os
 from bs4 import BeautifulSoup
 import progressbar
+import imghdr
 
 class down_pic:
 
@@ -25,13 +26,22 @@ class down_pic:
             if img.has_attr('class') and img['class'][0] == 'BDE_Image':
                 self.img_url.append(img['src'])
 
-    def downthem(self):
+    def downthem(self, auto_format = True):
         print 'A total of', len(self.img_url), 'pictures:'
         pbar = progressbar.ProgressBar()
         for url in pbar(self.img_url):
-            with open(str(self._num) + '.jpg', 'w') as f:
+            with open(str(self._num) , 'w') as f:
                 f.write(urllib2.urlopen(url).read())
             self._num = self._num + 1
+
+        if auto_format:
+            self.correct_type()
+
+    def correct_type(self):
+        files_list = [ img_file for img_file in os.listdir('.') if os.path.isfile(img_file) ]
+        for file_name in files_list:
+            img_type = imghdr.what(file_name)
+            os.rename(file_name, file_name+'.'+img_type)
 
 
 if __name__ == '__main__':
