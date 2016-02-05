@@ -3,9 +3,14 @@
 
 import urllib2
 import os
-from bs4 import BeautifulSoup
-import progressbar
-import imghdr
+
+try:
+    from bs4 import BeautifulSoup
+    import progressbar
+    import imghdr
+except ImportError:
+    print 'You may need to install bs4, progressbar or imghdr modules'
+    exit(1)
 
 class down_pic:
 
