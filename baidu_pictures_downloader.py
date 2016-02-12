@@ -24,7 +24,7 @@ class down_pic:
 
     def preprocess(self, url):
         html_content = urllib2.urlopen(url)
-        soup = BeautifulSoup(html_content)
+        soup = BeautifulSoup(html_content, 'html.parser')
 
         imgs = soup.find_all('img')
         for img in imgs:
